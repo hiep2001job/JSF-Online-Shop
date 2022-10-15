@@ -1,0 +1,191 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+                template="../templates/admin/adminBase.xhtml" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="pageCss">
+        <h:outputStylesheet name="adminAssets/vendors/datatables/dataTables.bootstrap.min.css"/>
+    </ui:define>
+    <ui:define name="title">Order detail </ui:define>
+    <ui:define name="content">
+        <h:form prependId="false" id="orderForm">
+            <div class="page-header no-gutters has-tab">
+                <div class="d-md-flex m-b-15 align-items-center justify-content-between">
+                    <div class="media align-items-center m-b-15">
+                        <div class="avatar avatar-image rounded" style="height: 70px; width: 70px">
+                            <img src="#{orderController.orderDetail.customerID.avatar}" alt=""/>
+                        </div>
+                        <div class="m-l-15">
+                            <h4 class="m-b-0">#{orderController.orderDetail.customerID.fullname} - Date: 
+                                <h:outputText value="#{item.orderDate}">
+                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                </h:outputText></h4>
+                            <p class="text-muted m-b-0">ID: ##{orderController.orderDetail.id}</p>
+                        </div>
+                    </div>
+                    <div jsf:rendered="#{not orderController.orderDetail.isConfirmed}"  class="m-b-15">
+                        <h:commandButton value="Confirm" action="#{orderController.confirmOrder()}" class="btn btn-primary">
+                            <f:param name="orderID" value="#{orderController.orderDetail.id}"/>
+                            <f:ajax execute="@this" render="growl orderForm"/>
+                        </h:commandButton>
+                    </div>
+                    <div jsf:rendered="#{orderController.orderDetail.isConfirmed}" class="m-b-15">
+                        <i class="fa fa-check"></i>
+                        <span>Order had been confirmed</span>
+                    </div>
+                </div>
+                <ul class="nav nav-tabs" >
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#product-overview">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#product-images">Products</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="container-fluid">
+                <div class="tab-content m-t-15">
+                    <div class="tab-pane fade show active" id="product-overview" >
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Order Info</h4>
+                                <div class="table-responsive">
+                                    <table class="product-info-table m-t-20">
+                                        <tbody>
+                                            <tr>
+                                                <td>Customer Name:</td>
+                                                <td class="text-dark font-weight-semibold">#{orderController.orderDetail.customerID.fullname}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Order Date:</td>
+                                                <td>	
+                                                    <h:outputText value="#{item.orderDate}">
+                                                        <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                                    </h:outputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Shipping address:</td>
+                                                <td>#{orderController.orderDetail.shippingAddress}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phone:</td>
+                                                <td>#{orderController.orderDetail.customerID.phone}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Status</td>
+                                                <td>
+
+                                                    <span jsf:rendered="#{!orderController.orderDetail.isConfirmed}" class="badge badge-pill badge-danger">Pending</span>
+                                                    <span jsf:rendered="#{orderController.orderDetail.isConfirmed}" class="badge badge-pill badge-danger">Confirmed</span>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table> 
+                                </div>
+                            </div>
+                        </div>
+                        <!--                        <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">Option Info</h4>
+                                                        <div class="table-responsive">
+                                                            <table class="product-info-table m-t-20">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Sizes:</td>
+                                                                        <td>S, M, L, XL</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Colors:</td>
+                                                                        <td class="d-flex">
+                                                                            <span class="d-flex align-items-center m-r-20">
+                                                                                <span class="badge badge-dot product-color m-r-5" style="background-color: #4c4e69"></span>
+                                                                                <span>Dark Blue</span>
+                                                                            </span>
+                                                                            <span class="d-flex align-items-center m-r-20">
+                                                                                <span class="badge badge-dot product-color m-r-5" style="background-color: #868686"></span>
+                                                                                <span>Gray</span>
+                                                                            </span>
+                                                                            <span class="d-flex align-items-center m-r-20">
+                                                                                <span class="badge badge-dot product-color m-r-5" style="background-color: #8498c7"></span>
+                                                                                <span>Gray Blue</span>
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Fit:</td>
+                                                                        <td>Skinny Fit</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Material:</td>
+                                                                        <td>Polyester</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Ship From:</td>
+                                                                        <td>Columbia</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h4 class="card-title">Product Description</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <p>Special cloth alert. The key to more success is to have a lot of pillows. Surround yourself with angels, positive energy, beautiful people, beautiful souls, clean heart, angel. They will try to close the door on you, just open it. A major key, never panic. Don’t panic, when it gets crazy and rough, don’t panic, stay calm. They key is to have every key, the key to open every door.</p>
+                                                        <p>The other day the grass was brown, now it’s green because I ain’t give up. Never surrender. Lion! I’m up to something. Always remember in the jungle there’s a lot of they in there, after you overcome they, you will make it to paradise.</p>
+                                                    </div>
+                                                </div>-->
+                    </div>
+                    <div class="tab-pane fade" id="product-images">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <table class="table table-hover e-commerce-table" >
+                                        <thead>
+                                            <tr>
+
+                                                <th>Product</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                                <th>Total</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody jsf:id="productList" >
+                                            <ui:repeat value="#{orderController.showOrderDetail()}" var="item" >
+                                                <tr>
+
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img class="img-fluid rounded" src="#{item.productID.thumb}" style="max-width: 60px" alt=""/>
+                                                            <h6 class="m-b-0 m-l-10">#{item.productID.name}</h6>
+                                                        </div>
+                                                    </td>
+                                                    <td>#{item.quantity}</td>                               
+                                                    <td>#{item.price}</td>
+                                                    <td>#{item.total}</td>
+
+
+                                                </tr>
+                                            </ui:repeat>                                
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+                template="../templates/admin/adminBase.xhtml" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">Category create</ui:define>
+    <ui:define name="content">
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+        <div class="page-header">
+            <h2 class="header-title">Category list</h2>
+            <div class="header-sub-title">
+                <nav class="breadcrumb breadcrumb-dash">
+                    <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Dashboard</a>
+                    <a class="breadcrumb-item" href="#">Categories</a>
+
+                    <span class="breadcrumb-item active">Create categories</span>
+                </nav>
+            </div>
+        </div>
+
+
+        <h:form prependId="false">
+            <div class="page-header no-gutters has-tab">                       
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row m-b-30">
+                            <div class="col-lg-4 ">
+                                <h:commandButton value="Create"  class="btn btn-primary" action="#{categoryCtrler.createCategory()}"/>
+                            </div>
+                            <div jsf:rendered="#{not empty categoryCtrler.message}" class="col-lg-4 ">
+                                <div class="alert alert-danger">
+                                    #{categoryCtrler.message}
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="productName">Category name</label>
+                            <h:inputText   class="form-control" id="productName" a:placeholder="Product Name" value="#{categoryCtrler.category.name}">
+                                <f:validateRequired />                                 
+                            </h:inputText>
+                        </div>                       
+                        <div class="form-group">
+                            <p:selectBooleanCheckbox class="form-check-inline" value="#{categoryCtrler.category.published}" itemLabel="Published"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="productDesc">Category description</label>
+                            <p:textEditor secure="false" widgetVar="editor1" value="#{categoryCtrler.category.description}" height="300" style="margin-bottom:10px"/>
+                        </div>    
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="productPrice">Order to show</label>
+                            <h:inputText a:type="number" class="form-control" value="#{categoryCtrler.category.ordering}"  />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="productPrice"> Parent</label>
+                        <h:selectOneMenu class="form-control" value="#{categoryCtrler.parentID}"  >
+                            <f:selectItems value="#{categoryCtrler.showAllCategories()}" var="item" itemLabel="#{item.name}" itemValue="#{item.id}"/>
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+               
+            </div>
+        </h:form>
+<!--        <script type="text/javascript">
+            $(document).ready(function(){
+               $('#') 
+            });
+        </script>-->
+    </ui:define>
+</ui:composition>
+

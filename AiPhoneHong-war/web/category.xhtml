@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+                template="templates/base.xhtml" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        <div id="content" class="site-content" tabindex="-1">
+            <div class="container">
+
+                <nav class="woocommerce-breadcrumb" ><a href="">Home</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>Search products</nav>
+
+                <div id="primary" class="content-area">
+                    <main id="main" class="site-main">
+                        <h:form prependId="false">
+                            <ul class="products columns-4">
+                                <ui:repeat value="#{showProductByCart.productList}" var="item">
+
+                                    <li class="product ">
+                                        <div class="product-outer">
+                                            <div class="product-inner">
+                                                <span class="loop-product-categories">#{item.catID.name}</span>
+
+                                                <h:link   outcome="productDetail" >
+                                                    <f:param name="productID" value="#{item.id}"/>
+                                                    <h3>#{item.name}</h3>
+                                                    <div class="product-thumbnail">
+
+                                                        <img data-echo="#{item.thumb}" src="" alt=""/>
+
+                                                    </div>
+                                                </h:link>
+
+                                                <div class="price-add-to-cart">
+                                                    <span class="price">
+                                                        <span class="electro-price">
+                                                            <ins>
+                                                                <span class="amount"> 
+                                                                    <h:outputText value="#{item.price}">
+                                                                        <f:convertNumber type="currency" locale="vi_VN" />
+                                                                    </h:outputText>
+                                                                </span>
+                                                            </ins>
+
+                                                        </span>
+                                                    </span>
+                                                    <h:commandButton action="#{cartCtrler.addCart(item.id, 1)}" value="Add to cart" >
+                                                        <f:param name="productID" value="#{homeShowProductDetail.product.id}"/>
+                                                        <f:ajax execute="@this" render="miniCart growl"/>
+                                                    </h:commandButton>
+                                                </div> 
+
+                                                <div class="hover-area">
+                                                    <div class="action-buttons">
+                                                        <!--                                                                                            <a href="#" rel="nofollow" class="add_to_wishlist">Wishlist</a>
+                                                                                                                                                    <a href="#" class="add-to-compare-link">Compare</a>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.product-inner -->
+                                        </div><!-- /.product-outer -->
+                                    </li>
+
+                                </ui:repeat>
+                            </ul>
+                        </h:form>
+
+
+
+
+                    </main><!-- main -->
+                </div><!-- primary -->
+            </div><!-- .container -->
+        </div> 
+    </ui:define>
+
+
+</ui:composition>

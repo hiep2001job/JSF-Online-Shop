@@ -1,0 +1,176 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+                template="../templates/admin/adminBase.xhtml" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">Product create</ui:define>
+    <ui:define name="content">
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+        <div class="page-header">
+            <h2 class="header-title">Product Edit</h2>
+            <div class="header-sub-title">
+                <nav class="breadcrumb breadcrumb-dash">
+                    <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Dashboard</a>
+                    <a class="breadcrumb-item" href="#">Products</a>
+
+                    <span class="breadcrumb-item active">Edit Product</span>
+                </nav>
+            </div>
+        </div>
+        <h:form prependId="false" enctype="multipart/form-data">
+
+            <div class="page-header no-gutters has-tab">                       
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row m-b-30">
+                            <div class="col-lg-4 ">
+                                <h:commandButton value="Save"  class="btn btn-primary" action="#{productCtrler.saveEditProduct()}"/>
+                            </div>
+                            <div jsf:rendered="#{not empty productCtrler.message}" class="col-lg-4 ">
+                                <div class="alert alert-danger">
+                                    #{productCtrler.message}
+                                </div>
+                            </div>                            
+                        </div>
+                        <h:inputHidden value="#{productCtrler.selectedEditProducts.id}" />
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="productName">Product name</label>
+                            <h:inputText   class="form-control" id="productName" 
+                                           a:placeholder="Product Name" 
+                                           value="#{productCtrler.selectedEditProducts.name}"
+                                           requiredMessage="Please enter product name">
+                                <f:validateRequired />                                 
+                            </h:inputText>
+                            <h:message for="productName" style="color:red"/>
+                        </div>   
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="productPrice">Price VND</label>
+                            <h:inputText  a:type="number" class="form-control" id="productPrice" 
+                                          a:placeholder="Product price" 
+                                          value="#{productCtrler.selectedEditProducts.price}"
+                                          validatorMessage="Price must be greater than 0"  
+                                          requiredMessage="Please enter short description">
+                                <f:validateRequired />  
+                                <f:validateDoubleRange minimum="1"  />                                 
+                            </h:inputText>
+                            <h:message for="productPrice" style="color:red"/>
+                        </div>   
+                       
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="productStock">Stock</label>
+                            <h:inputText  a:type="number" class="form-control" id="productStock" 
+                                          a:placeholder="Product in stock" value="#{productCtrler.selectedEditProducts.unitInStock}"
+                                          validatorMessage="Stock must be greater than 0" requiredMessage="Please enter short description">
+                                <f:validateRequired />  
+                                <f:validateDoubleRange minimum="1"  />                               
+                            </h:inputText>
+                            <h:message for="productStock" style="color:red"/>
+                        </div>  
+                        <div class="form-group">
+                            <h:selectBooleanCheckbox class="form-check-inline" value="#{productCtrler.selectedEditProducts.active}" />
+                            <h:outputText value="Active"/>
+                        </div>
+                        <div class="form-group">
+                            <h:selectBooleanCheckbox class="form-check-inline" value="#{productCtrler.selectedEditProducts.bestSellers}" />
+                            <h:outputText value="Bestseller"/>
+                        </div>
+                        <div class="form-group">
+                            <h:selectBooleanCheckbox class="form-check-inline" value="#{productCtrler.selectedEditProducts.homeFlag}" />
+                            <h:outputText value="Home flag"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="productShowdesc">Short desciption</label>
+                            <h:inputText   class="form-control" id="productShowdesc" 
+                                           a:placeholder="Short description" 
+                                           value="#{productCtrler.selectedEditProducts.shortDesc}"
+                                           requiredMessage="Please enter short description">
+                                <f:validateRequired />                                 
+                            </h:inputText>
+                            <h:message for="productShowdesc" style="color:red"/>
+                        </div>   
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="productDesc">Product description</label>
+                            <p:textEditor secure="false" widgetVar="editor1" value="#{productCtrler.selectedEditProducts.description}" height="300" style="margin-bottom:10px"/>
+                        </div>                         
+
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="productPrice"> Category</label>
+                            <h:selectOneMenu class="form-control" value="#{productCtrler.selectedEditCategory}"  >
+                                <f:selectItems value="#{productCtrler.showCategories()}" var="item" itemLabel="#{item.name}" itemValue="#{item.id}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <img alt="Upload image" src="#{productCtrler.selectedEditProducts.thumb}" witdh="200px" id="mainImg" />
+                        <i class="anticon anticon-loading"  id="loading-icon"></i>
+                        <div class="custom-file mt-5">
+                            <h:inputFile  class="custom-file-input" id="fMainImg"
+                                          requiredMessage="Please enter image">                             
+                            </h:inputFile>
+                            <label class="custom-file-label" for="customFile">Thumb Image</label>
+                        </div>
+                        
+                        <h:inputHidden id="thumb" value="#{productCtrler.selectedEditProducts.thumb}"/>
+                    </div>
+                </div>
+
+            </div>
+        </h:form>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                //preview price
+                $("#productDiscount").on("change", function () {
+
+                    if ($("#productPrice").val() !== null) {
+                        dis = parseFloat($("#productDiscount").val());
+                        price = parseFloat($("#productPrice").val());
+                        $("#last-price").text("Last price:" + (price - price * dis / 100) + " VND");
+                    }
+                });
+                //preview image
+                $("#loading-icon").hide();
+                $('#fMainImg').on("change",
+                        function (e) {
+                            $('#mainImg').attr("src", URL.createObjectURL(e.target.files[0]));
+                            uploadImageToBBIMG();
+                        }
+                );
+                //upload ajax
+                function uploadImageToBBIMG() {
+
+                    var formData = new FormData();
+                    var file = document.getElementById("fMainImg").files[0];
+
+                    formData.append('image', file);
+                    $.ajax({
+                        url: "https://api.imgbb.com/1/upload?key=af8f84a0408a1d504346b234d0b9ac51",
+                        method: "POST",
+                        data: formData,
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        before: function (xhr) {
+                            $('#loading-icon').show();
+                        },
+                        success: function (data, textStatus, jqXHR) {
+                            result = JSON.stringify(data);
+                            jsonResult = JSON.parse(result);
+
+                            $("#thumb").val(jsonResult.data.url);
+                            $('#loading-icon').hide();
+                        }, error: function (jqXHR, textStatus, errorThrown) {
+                            console.log(textStatus);
+
+                        }
+                    });
+                }
+            });
+        </script>
+    </ui:define>
+</ui:composition>
+

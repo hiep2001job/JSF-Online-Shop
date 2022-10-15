@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+                template="templates/base.xhtml" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <ui:define name="content">
+        <div id="content" class="site-content" tabindex="-1">
+            <div class="container">
+
+                <nav class="woocommerce-breadcrumb" ><a href="home.html">Home</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>My Account</nav><!-- .woocommerce-breadcrumb -->
+
+                <div id="primary" class="content-area">
+                    <main id="main" class="site-main">
+                        <article id="post-8" class="hentry">
+
+                            <div class="entry-content">
+                                <div class="woocommerce">
+                                    <div class="customer-login-form">
+                                        <span class="or-text">or</span>
+
+                                        <div class="col2-set" id="customer_login">
+
+                                            <div class="col-1">
+
+                                                <div jsf:rendered="#{not empty userIdentity.message}" class="alert alert-danger" role="alert">
+                                                    #{userIdentity.message}
+                                                </div>
+                                                <h2>Login</h2>
+
+                                                <h:form  class="login">
+
+                                                    <p class="before-login-text">Welcome back! Sign in to your account</p>
+
+                                                    <p class="form-row form-row-wide">
+                                                        <label for="username">Email address<span class="required">*</span></label>
+                                                        <h:inputText  class="input-text"  id="username" value="#{userIdentity.email}" />
+                                                    </p>
+
+                                                    <p class="form-row form-row-wide">
+                                                        <label for="password">Password<span class="required">*</span></label>
+                                                        <h:inputSecret class="input-text"  value="#{userIdentity.password}" id="password" />
+                                                    </p>
+
+                                                    <p class="form-row">
+
+                                                        <h:commandButton value="Login" action="#{userIdentity.login()}"/>
+                                                        <!--<label for="rememberme" class="inline"><input name="rememberme" type="checkbox" id="rememberme" value="forever" /> Remember me</label>-->
+                                                    </p>
+
+                                                    <!--<p class="lost_password"><a href="login-and-register.html">Lost your password?</a></p>-->
+
+                                                </h:form>
+
+
+                                            </div> 
+
+                                            <div class="col-2">
+
+                                                <h2>Register</h2>
+
+                                                <form method="post" class="register">
+
+                                                    <p class="before-register-text">Create your very own account</p>
+
+
+
+                                                    <p class="form-row"><h:link  class="button" outcome="signUp" value="Register" /></p>
+
+                                                    <div class="register-benefits">
+                                                        <h3>Sign up today and you will be able to :</h3>
+                                                        <ul>
+                                                            <li>Speed your way through checkout</li>
+                                                            <li>Track your orders easily</li>
+
+                                                        </ul>
+                                                    </div>
+
+                                                </form>
+
+                                            </div><!-- .col-2 -->
+
+                                        </div><!-- .col2-set -->
+
+                                    </div><!-- /.customer-login-form -->
+                                </div><!-- .woocommerce -->
+                            </div><!-- .entry-content -->
+
+                        </article><!-- #post-## -->
+
+                    </main><!-- #main -->
+                </div><!-- #primary -->
+
+            </div><!-- .col-full -->
+        </div><!-- #content -->
+
+    </ui:define>
+</ui:composition>

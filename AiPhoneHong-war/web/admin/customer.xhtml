@@ -1,0 +1,107 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+                template="../templates/admin/adminBase.xhtml" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="pageCss">
+        <h:outputStylesheet name="adminAssets/vendors/datatables/dataTables.bootstrap.min.css"/>
+    </ui:define>
+    <ui:define name="title">Customer</ui:define>
+    <ui:define name="content">
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+        <h:form prependId="false">
+            <div class="page-header">
+                <h2 class="header-title">Product list</h2>
+                <div class="header-sub-title">
+                    <nav class="breadcrumb breadcrumb-dash">
+                        <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Dashboard</a>
+                        <a class="breadcrumb-item" href="#">Customers</a>
+                        <span class="breadcrumb-item active">View Customers</span>
+                    </nav>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row m-b-30">
+                        <div class="col-lg-8">
+                            <div class="d-md-flex">
+                                <div class="m-b-10">
+                                    <label><span>Search: (Click empty space to search)</span>
+                                        <h:inputText value="#{customerCtrler.filterName}" a:type="search" class="form-control form-control-sm" a:placeholder="search name">
+                                            <f:ajax listener="#{customerCtrler.applySearch()}" event="change" render="customerList"/>
+                                        </h:inputText>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="table-responsive">
+
+                        <table class="table table-hover e-commerce-table" >
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Full name</th>
+                                    <th>Birthday</th>
+                                   
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Status</th>
+                                    
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody jsf:id="customerList" >
+                                <ui:repeat value="#{customerCtrler.customerList}" var="item" >
+                                    <h:commandLink action="#{customerCtrler.detail(item.id)}">
+                                    <tr>
+                                        <td>
+                                            #{item.id}
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img class="img-fluid rounded" src="#{item.avatar}" style="max-width: 100px" alt=""/>
+                                                <h6 class="m-b-0 m-l-10">#{item.fullname}</h6>
+                                            </div>
+                                        </td>
+                                        <td><h:outputText value="#{item.birthday}"><f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText></td>
+                                         <td>
+                                            #{item.email}
+                                        </td>
+                                         <td>
+                                            #{item.phone}
+                                        </td>
+                                        <td>
+                                            <div jsf:rendered="#{item.active}" class="d-flex align-items-center">
+                                                <div class="badge badge-success badge-dot m-r-10"></div>
+                                                <div>Actice</div>
+                                            </div>
+                                            <div jsf:rendered="#{!item.active}" class="d-flex align-items-center">
+                                                <div class="badge badge-danger badge-dot m-r-10"></div>
+                                                <div>Not Active</div>
+                                            </div>
+                                        </td>
+                                        <td >
+<!--                                            <h:commandButton class="btn btn-icon btn-hover btn-sm btn-rounded "  value="edit"  action="{productCtrler.edit(item.id)}"/> <span> || </span>
+
+                                            <h:commandButton  class="btn btn-icon btn-hover btn-sm btn-rounded" onclick="return confirm('Are you sure to delete?')"  value="delete"  action="{productCtrler.deleteProduct(item.id)}">
+                                             
+                                            </h:commandButton>-->
+
+                                        </td>
+                                    </tr>
+                                        </h:commandLink>
+                                </ui:repeat>                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

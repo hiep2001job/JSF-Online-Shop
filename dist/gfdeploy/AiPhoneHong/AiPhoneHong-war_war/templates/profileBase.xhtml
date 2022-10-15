@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>    
+        <title>AiPhoneHong</title>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,700italic,800,800italic,600italic,400italic,300italic' rel='stylesheet' type='text/css'/>
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['assets/images/fav-icon.png']}"/>
+        <h:outputStylesheet  name="assets/css/bootstrap.min.css"  />       
+        <h:outputStylesheet name="assets/css/font-awesome.min.css" />
+        <h:outputStylesheet name="assets/css/animate.min.css" />
+        <h:outputStylesheet name="assets/css/font-electro.css" />
+        <h:outputStylesheet name="assets/css/owl-carousel.css" />
+        <h:outputStylesheet name="assets/css/style.css" />
+        <h:outputStylesheet name="assets/css/colors/yellow.css" />
+        <h:outputScript name="assets/js/jquery.min.js"></h:outputScript>
+    </h:head>
+
+
+    <h:body class="page home page-template-default">   
+        <div id="page" class="hfeed site">
+            <ui:insert name="header">
+                <ui:include src="header.xhtml"/>
+            </ui:insert>
+            <ui:insert name="content">
+                <div id="content" class="site-content" >
+                    <div class="container">
+
+                        <div class="row mt-10">
+                            <div class="col-md-4">
+                                <aside class="widget woocommerce widget_product_categories electro_widget_product_categories">
+                                    <ul class="product-categories category-single">
+                                        <li class="product_cat">
+                                            <ul>
+                                                <li class="cat-item current-cat"> 
+                                                    <a href="#">Profile </a> 
+                                                    <h:form prependId="false" id="account-nav-form">
+                                                    <ul class='children'>
+                                                        <li class="cat-item"> <h:link value="> Information" outcome="profile"/></li>
+                                                        <li class="cat-item"> <h:link value="> Addresses" outcome="profileAddresses"/></li>
+                                                        <li class="cat-item"> <h:link value="> Orders" outcome="profileOrders"/></li>   
+                                                        <li class="cat-item"> <h:commandLink style="color:red" value="> Logout" action="#{userIdentity.logout()}"/></li>   
+                                                        
+                                                    </ul>
+                                                        </h:form>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </aside>
+                            </div>
+                            <div class="col-md-8">
+                                <ui:insert name="profileContent"></ui:insert>
+                            </div>
+                        </div>
+                    </div><!-- .container -->
+                </div><!-- content -->
+            </ui:insert>
+            <ui:insert name="footer">
+                <ui:include src="footer.xhtml"/>
+            </ui:insert>
+
+
+
+            <h:outputScript name="assets/js/tether.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/bootstrap.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/bootstrap-hover-dropdown.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/owl.carousel.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/echo.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/wow.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/jquery.easing.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/jquery.waypoints.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/electro.js"></h:outputScript>
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,137 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+                template="templates/base.xhtml" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+
+        <div id="content" class="site-content" tabindex="-1">
+            <div class="container">
+
+                <nav class="woocommerce-breadcrumb"><a href="home.html">Home</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>Cart</nav>
+
+                <div id="primary" class="content-area">
+                    <main id="main" class="site-main">
+                        <article class="page type-page status-publish hentry">
+                            <header class="entry-header"><h1 itemprop="name" class="entry-title">Cart</h1></header><!-- .entry-header -->
+
+                            <h:form prependId="false">
+
+                                <table class="shop_table shop_table_responsive cart">
+                                    <thead>
+                                        <tr>
+                                            <th class="product-remove"></th>
+                                            <th class="product-thumbnail"></th>
+                                            <th class="product-name">Product</th>
+                                            <th class="product-price">Price</th>
+                                            <th class="product-quantity">Quantity</th>
+                                            <th class="product-subtotal">Total</th>         
+                                            <th class="product-subtotal">Check to buy</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody jsf:id="cartList">
+                                        <ui:repeat value="#{cartCtrler.list}" var="item">
+                                            <tr class="cart_item">
+
+                                                <td class="product-remove">
+                                                    <h:commandLink value="×" action="#{cartCtrler.delete(item.product.id)}">
+                                                        <f:ajax execute="@this" render="cartList total" />
+                                                    </h:commandLink>
+                                                </td>
+
+                                                <td class="product-thumbnail">
+                                                    <a href="#"><img width="180" height="180" src="#{item.product.thumb}" alt=""/></a>
+                                                </td>
+
+                                                <td data-title="Product" class="product-name">
+                                                    <a href="single-product.html">#{item.product.name}</a>
+                                                </td>
+
+                                                <td data-title="Price" class="product-price">
+                                                    <span class="amount">
+                                                        <h:outputText value="#{item.product.price}">
+                                                            <f:convertNumber type="currency" locale="vi_VN" />
+                                                        </h:outputText>
+                                                    </span>
+                                                </td>
+
+                                                <td data-title="Quantity" class="product-quantity">
+                                                    <div class="quantity buttons_added">
+
+                                                        <label>Quantity:</label>
+
+                                                        <h:inputText class="input-text qty text" a:type="number" value="#{item.quantity}" >
+                                                            <f:ajax render="cartList total"/>
+                                                        </h:inputText>
+
+                                                    </div>
+                                                </td>
+
+
+                                                <td data-title="Total" class="product-subtotal">
+                                                    <span class="amount">
+                                                        <h:outputText value="#{item.product.price*item.quantity}">
+                                                            <f:convertNumber type="currency" locale="vi_VN" />
+                                                        </h:outputText>
+                                                    </span>
+                                                </td>
+                                                <td data-title="Quantity" class="product-quantity">
+                                                    <div class="quantity buttons_added">
+
+                                                        <label>Check:</label>
+
+                                                        <h:selectBooleanCheckbox   value="#{item.isChecked}" >
+                                                            <f:ajax render="cartList total"/>
+                                                        </h:selectBooleanCheckbox>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </ui:repeat>
+                                    </tbody>
+                                </table>
+
+                                <div class="cart-collaterals" jsf:id="total">
+
+                                    <div class="cart_totals ">
+
+                                        <h2>Cart Totals</h2>
+
+                                        <table class="shop_table shop_table_responsive">
+
+                                            <tbody>
+                                                <tr class="order-total">
+                                                    <th>Total</th>
+                                                    <td data-title="Total">
+                                                        <strong>
+                                                            <span class="amount">
+                                                                <h:outputText  value="#{cartCtrler.checkedTotal()}">
+                                                                    <f:convertNumber type="currency" locale="vi_VN" />
+                                                                </h:outputText>
+                                                            </span>
+                                                        </strong> 
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                        <h:link id="checkoutBtn" rendered="#{not empty cartCtrler.showCheckedList()}" class="checkout-button button alt wc-forward" outcome="checkout" value="Proceed to Checkout"/>
+
+                                    </div>
+                                </div>
+                            </h:form>
+                        </article>
+                    </main><!-- #main -->
+                </div><!-- #primary -->
+            </div><!-- .container -->
+
+        </div><!-- #content -->
+    </ui:define>
+</ui:composition>

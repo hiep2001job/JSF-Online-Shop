@@ -1,0 +1,173 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+                template="templates/base.xhtml" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <div id="content" class="site-content" tabindex="-1">
+            <div class="container">
+
+                <nav class="woocommerce-breadcrumb" ><a href="home.html">Home</a><span class="delimiter"><i class="fa fa-angle-right"></i></span>My Account</nav><!-- .woocommerce-breadcrumb -->
+
+                <div id="primary" class="content-area">
+                    <main id="main" class="site-main">
+                        <article id="post-8" class="hentry">
+
+                            <div class="entry-content">
+                                <div class="woocommerce">
+                                    <div class="customer-login-form">
+
+                                        <div class="col-md-6 col-md-offset-3 ">
+                                            <h2>Register</h2>
+                                            <h:form prependId="false" class="register" enctype="multipart/form-data"> 
+                                                <p class="before-register-text">Create your very own account</p>
+
+                                                <p class="form-row form-row-wide">
+                                                    <label for="fname">Fullname<span class="required">*</span></label>
+                                                    <h:inputText  class="input-text"  id="fname" 
+                                                                  value="#{userIdentity.regisCustomer.fullname}" 
+                                                                  requiredMessage="Please enter fullname">
+                                                        <f:ajax event="blur" render="nameMesage" />     
+                                                        <f:validateRequired />
+                                                    </h:inputText>
+                                                    <h:message id="nameMesage" style="color: red"  for="fname"/>
+                                                </p>
+                                                <p class="form-row form-row-wide">
+                                                    <label for="email">Email<span class="required">*</span></label>
+                                                    <h:inputText  class="input-text"  id="email" 
+                                                                  value="#{userIdentity.regisCustomer.email}" 
+                                                                  requiredMessage="Please enter validate Email">
+                                                        <f:validateRequired />                                                        
+                                                        <f:validator validatorId="uniqueEmailValidator" />
+                                                        <f:ajax event="blur" render="mailMessage" />     
+                                                    </h:inputText>
+                                                    <h:message  style="color: red" id="mailMessage" for="email"/>
+                                                </p>
+                                                <p class="form-row form-row-wide">
+                                                    <label for="password">Password<span class="required">*</span></label>
+                                                    <h:inputSecret class="input-text"  id="password" 
+                                                                   value="#{userIdentity.regisCustomer.password}" 
+                                                                   requiredMessage="Please enter validate password">
+                                                        <f:validateRequired />                                                      
+                                                        <f:ajax event="blur" render="passwordMessage" />     
+                                                    </h:inputSecret>
+                                                    <h:message  style="color: red" id="passwordMessage" for="password"/>
+                                                </p>
+
+                                                <p class="form-row form-row-wide">
+                                                    <label for="bd">Birthday (dd-MM-yyyy)<span class="required">*</span></label>
+                                                    <h:inputText  class="input-text"  id="bd" 
+                                                                  value="#{userIdentity.regisCustomer.birthday}" 
+                                                                  requiredMessage="Please enter validate birthday">
+                                                        <f:validateRequired />
+
+                                                        <f:ajax event="blur" render="bdMessage" />     
+                                                        <f:convertDateTime pattern="dd-MM-yyy"/>  
+                                                    </h:inputText>
+                                                    <h:message  style="color: red" id="bdMessage" for="bd"/>
+                                                </p>
+                                                <p class="form-row form-row-wide">
+                                                    <label for="phone">Phone<span class="required">*</span></label>
+                                                    <h:inputText  class="input-text"  id="phone" 
+                                                                  value="#{userIdentity.regisCustomer.phone}" 
+                                                                  requiredMessage="Please enter phone">
+                                                        <f:ajax event="blur" render="phoneMesage" />     
+                                                        <f:validateRequired />
+                                                    </h:inputText>
+                                                    <h:message id="phoneMesage" style="color: red"  for="phone"/>
+                                                </p>
+                                                <p class="form-row form-row-wide">
+                                                    <label for="address">Address<span class="required">*</span></label>
+                                                    <h:inputText  class="input-text"  id="address" 
+                                                                  value="#{userIdentity.regisCustomer.address}" 
+                                                                  requiredMessage="Please enter address">
+                                                        <f:ajax event="blur" render="addressMesage" />     
+                                                        <f:validateRequired />
+                                                    </h:inputText>
+                                                    <h:message id="addressMesage" style="color: red"  for="address"/>
+                                                </p>
+                                                <p class="form-row form-row-wide">
+                                                    <img width="200px" id="avtImg" src="#{userIdentity.regisCustomer.avatar}" alt="Image"/>
+                                                    <label for="avt">Avatar<span class="required">*</span></label>
+                                                    <h:inputFile class="input-text"  id="favt" />
+                                                </p>
+                                                <h:inputHidden id="avt" value="#{userIdentity.regisCustomer.avatar}" requiredMessage="Please wait for image uploading">
+                                                    <f:validateRequired/>
+                                                </h:inputHidden>
+                                                <h:message for="avt" style="color:red"/>
+                                                <p class="form-row"><h:commandButton id="regisBtn" class="button" action="#{userIdentity.register()}" value="Register" /></p>
+
+                                                <div class="register-benefits">
+                                                    <h3>Sign up today and you will be able to :</h3>
+                                                    <ul>
+                                                        <li>Speed your way through checkout</li>
+                                                        <li>Track your orders easily</li>
+                                                        <li>Keep a record of all your purchases</li>
+                                                    </ul>
+                                                </div>
+
+                                            </h:form>
+
+                                        </div><!-- .col-2 -->
+
+
+
+                                    </div><!-- /.customer-login-form -->
+                                </div><!-- .woocommerce -->
+                            </div><!-- .entry-content -->
+
+                        </article><!-- #post-## -->
+
+                    </main><!-- #main -->
+                </div><!-- #primary -->
+
+            </div><!-- .col-full -->
+        </div><!-- #content -->
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                //preview image
+
+                $('#favt').on("change",
+                        function (e) {
+                            uploadImageToBBIMG();
+                            $('#avtImg').attr("src", URL.createObjectURL(e.target.files[0]));
+                        }
+                );
+                //upload ajax
+                function uploadImageToBBIMG() {
+
+                    var formData = new FormData();
+                    var file = document.getElementById("favt").files[0];
+
+                    formData.append('image', file);
+                    $.ajax({
+                        url: "https://api.imgbb.com/1/upload?key=af8f84a0408a1d504346b234d0b9ac51",
+                        method: "POST",
+                        data: formData,
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        beforeSend: function (xhr) {
+                            $("#regisBtn").prop("disabled", true);
+                        },
+                        success: function (data, textStatus, jqXHR) {
+                            result = JSON.stringify(data);
+                            jsonResult = JSON.parse(result);
+
+                            $("#avt").val(jsonResult.data.url);
+                            $("#regisBtn").prop("disabled", false);
+
+
+                        }, error: function (jqXHR, textStatus, errorThrown) {
+                            console.log(textStatus);
+
+                        }
+                    });
+                }
+            });
+        </script>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,16 @@
+com/entities/Accounts_.java
+com/entities/Locations_.java
+com/entities/AttributeDetails_.java
+com/entities/OrderDetails_.java
+com/entities/AttributesDetails_.java
+com/entities/Roles_.java
+com/entities/Attributes_.java
+com/entities/Products_.java
+com/entities/Customers_.java
+com/entities/Pages_.java
+com/entities/Categories_.java
+com/entities/Shippers_.java
+com/entities/Orders_.java
+com/entities/Posts_.java
+com/entities/Slides_.java
+com/entities/TransactionStatus_.java

@@ -1,0 +1,113 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+                template="templates/base.xhtml" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <h:form prependId="false">
+            <div id="content" class="site-content" tabindex="-1">
+                <div class="container">
+
+                    <nav class="woocommerce-breadcrumb">
+                        <a href="home.html">Home</a>
+                        <span class="delimiter"><i class="fa fa-angle-right"></i></span>
+                        <a href="#">#{homeShowProductDetail.product.catID.name}</a>
+
+                        <span class="delimiter"><i class="fa fa-angle-right"></i>   </span>
+                        <a href="#">#{homeShowProductDetail.product.name}</a>
+
+                    </nav><!-- /.woocommerce-breadcrumb -->
+
+                    <div id="primary" class="content-area">
+                        <main id="main" class="site-main">
+
+                            <div class="product">
+
+                                <div class="single-product-wrapper">
+                                    <div class="product-images-wrapper">
+
+                                        <img src="#{homeShowProductDetail.product.thumb}" width="500"/>
+                                    </div><!-- /.product-images-wrapper -->
+
+                                    <div class="summary entry-summary">
+
+                                        <span class="loop-product-categories">
+                                            <a href="product-category.html" rel="tag">#{homeShowProductDetail.product.catID.name}</a>
+                                        </span><!-- /.loop-product-categories -->
+
+                                        <h1 itemprop="name" class="product_title entry-title">#{homeShowProductDetail.product.name}</h1>
+
+
+
+
+
+
+
+                                        <hr class="single-product-title-divider" />
+
+                                        <div class="action-buttons">
+
+
+
+
+
+                                        </div><!-- .action-buttons -->
+
+                                        <div itemprop="description">
+                                            <h:outputLabel escape="false" value="#{homeShowProductDetail.product.shortDesc}"/>
+                                        </div><!-- .description -->
+
+                                        <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+
+                                            <p class="price"><span class="electro-price">
+                                                    <ins>
+                                                        <span class="amount"> 
+                                                            <h:outputText value="#{homeShowProductDetail.product.price}">
+                                                                <f:convertNumber type="currency" locale="vi_VN" />
+                                                            </h:outputText>
+                                                        </span>
+                                                    </ins> 
+                                                </span>
+                                            </p>
+
+
+
+                                        </div><!-- /itemprop -->
+
+
+                                        <div class="single_variation_wrap">
+                                            <div class="woocommerce-variation single_variation"></div>
+                                            <div class="woocommerce-variation-add-to-cart variations_button">
+                                                <!--                                                    <div class="quantity">
+                                                                                                        <label>Quantity:</label>
+                                                                                                        <input type="number" name="quantity" value="1" title="Qty" class="input-text qty text"/>
+                                                                                                    </div>-->
+                                                <h:commandButton action="#{cartCtrler.addCart(homeShowProductDetail.product.id, 1)}" value="Add to cart" >
+                                                    <f:param name="productID" value="#{homeShowProductDetail.product.id}"/>
+                                                    <f:ajax execute="@this" render="miniCart growl"/>
+                                                </h:commandButton>
+                                                <!--                                                    <input type="hidden" name="add-to-cart" value="2452" />
+                                                                                                    <input type="hidden" name="product_id" value="2452" />
+                                                                                                    <input type="hidden" name="variation_id" class="variation_id" value="0" />-->
+                                            </div>
+                                        </div>
+
+
+                                    </div><!-- .summary -->
+                                </div><!-- /.single-product-wrapper -->
+                            </div><!-- /.product -->
+                            <h2>Description</h2>
+                            <div class="mt-10">
+                                <h:outputLabel escape="false" value="#{homeShowProductDetail.product.description}"/>
+                            </div>
+                        </main><!-- /.site-main -->
+                    </div><!-- /.content-area -->
+                </div><!-- /.container -->
+            </div><!-- /.site-content -->
+        </h:form>
+    </ui:define>
+</ui:composition>

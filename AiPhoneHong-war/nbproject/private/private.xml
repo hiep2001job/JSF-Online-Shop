@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/E:/Aptech/EJB/Projects/AiPhoneHong/AiPhoneHong-war/src/java/com/controllers/CategoryController.java</file>
+            <file>file:/E:/Aptech/EJB/Projects/AiPhoneHong/AiPhoneHong-war/web/WEB-INF/web.xml</file>
+            <file>file:/E:/Aptech/EJB/Projects/AiPhoneHong/AiPhoneHong-war/web/admin/categoryCreate.xhtml</file>
+            <file>file:/E:/Aptech/EJB/Projects/AiPhoneHong/AiPhoneHong-war/web/admin/productEdit.xhtml</file>
+            <file>file:/E:/Aptech/EJB/Projects/AiPhoneHong/AiPhoneHong-war/web/templates/admin/adminBase.xhtml</file>
+            <file>file:/E:/Aptech/EJB/Projects/AiPhoneHong/AiPhoneHong-war/web/productDetail.xhtml</file>
+            <file>file:/E:/Aptech/EJB/Projects/AiPhoneHong/AiPhoneHong-war/web/admin/adminDashboard.xhtml</file>
+            <file>file:/E:/Aptech/EJB/Projects/AiPhoneHong/AiPhoneHong-war/src/java/com/controllers/CartController.java</file>
+            <file>file:/E:/Aptech/EJB/Projects/AiPhoneHong/AiPhoneHong-war/src/java/com/controllers/ProductController.java</file>
+            <file>file:/E:/Aptech/EJB/Projects/AiPhoneHong/AiPhoneHong-war/web/WEB-INF/glassfish-web.xml</file>
+            <file>file:/E:/Aptech/EJB/Projects/AiPhoneHong/AiPhoneHong-war/web/admin/productCreate.xhtml</file>
+            <file>file:/E:/Aptech/EJB/Projects/AiPhoneHong/AiPhoneHong-war/web/signIn.xhtml</file>
+            <file>file:/E:/Aptech/EJB/Projects/AiPhoneHong/AiPhoneHong-war/web/admin/product.xhtml</file>
+            <file>file:/E:/Aptech/EJB/Projects/AiPhoneHong/AiPhoneHong-war/src/java/com/authentication/UserIdentity.java</file>
+        </group>
+    </open-files>
+</project-private>

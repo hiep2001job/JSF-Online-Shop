@@ -1,0 +1,94 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+                template="../templates/admin/adminBase.xhtml" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="pageCss">
+        <h:outputStylesheet name="adminAssets/vendors/datatables/dataTables.bootstrap.min.css"/>
+    </ui:define>
+    <ui:define name="title">Orders management</ui:define>
+    <ui:define name="content">
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+        <h:form prependId="false">
+            <div class="page-header">
+                <h2 class="header-title">Order list</h2>
+                <div class="header-sub-title">
+                    <nav class="breadcrumb breadcrumb-dash">
+                        <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Dashboard</a>
+                      
+                        <span class="breadcrumb-item active">Order list</span>
+                    </nav>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row m-b-30">
+                        <div class="col-lg-8">
+                            <div class="d-md-flex">
+                                <div class="m-b-10">
+                                    <label><span>Search: (Click empty space to search)</span>
+                                        <h:inputText value="#{productCtrler.filterName}" a:type="search" class="form-control form-control-sm" a:placeholder="search name">
+                                            <f:ajax listener="#{productCtrler.applySearch()}" event="change" render="productList"/>
+                                        </h:inputText>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="table-responsive">
+
+                        <table class="table table-hover e-commerce-table" >
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody jsf:id="productList" >
+                                <ui:repeat value="#{orderController.orderList}" var="item" >
+                                    <tr>
+                                        <td>
+                                            #{item.id}
+                                        </td>
+                                        
+                                        <td>#{item.customerID.fullname}</td>
+                                        <td>
+                                            <h:outputText value="#{item.orderDate}">
+                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            </h:outputText>
+                                        </td>
+                                        <td>
+                                            <div jsf:rendered="#{item.isConfirmed}" class="d-flex align-items-center">
+                                                <div class="badge badge-success badge-dot m-r-10"></div>
+                                                <div>Confirmed</div>
+                                            </div>
+                                            <div jsf:rendered="#{!item.isConfirmed}" class="d-flex align-items-center">
+                                                <div class="badge badge-danger badge-dot m-r-10"></div>
+                                                <div>Pending</div>
+                                            </div>
+                                        </td>
+                                        <td >
+                                            <h:commandButton class="btn btn-info"  value="Detail"  action="#{orderController.viewOrderDetail(item.id)}"/> <span> </span>
+
+                                            
+
+                                        </td>
+                                    </tr>
+                                </ui:repeat>                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

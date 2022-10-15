@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+                template="templates/profileBase.xhtml" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="profileContent">
+        <article class="page type-page status-publish hentry">
+            <header class="entry-header"><h1 itemprop="name" class="entry-title">Profile information</h1></header><!-- .entry-header -->
+
+            <h:form enctype="multipart/form-data"  class="checkout woocommerce-checkout" >
+                <div id="customer_details" class="col2-set">
+                    <div class="col-1">
+                        <div class="woocommerce-billing-fields">                         
+
+                           
+
+                            <p class="form-row form-row-wide">
+                                <label for="fname">Fullname<span class="required">*</span></label>
+                                <h:inputText  class="input-text"  id="fname" 
+                                              value="#{userIdentity.customer.fullname}" 
+                                              requiredMessage="Please enter fullname">
+                                    <f:ajax event="blur" render="nameMesage" />     
+                                    <f:validateRequired />
+                                </h:inputText>
+                                <h:message id="nameMesage" style="color: red"  for="fname"/>
+                            </p>
+                            <p class="form-row form-row-wide">
+                                <label for="email">Email<span class="required">*</span></label>
+                                <h:inputText  class="input-text"  id="email" 
+                                              value="#{userIdentity.customer.email}" 
+
+                                              requiredMessage="Please enter validate Email">
+                                    <f:validateRequired />                                                        
+                                    <f:validator validatorId="uniqueEmailValidator" />
+                                    <f:ajax event="blur" render="mailMessage" />     
+                                </h:inputText>
+                                <h:message  style="color: red" id="mailMessage" for="email"/>
+                            </p>
+                            <p class="form-row form-row-wide">
+                                <label for="password">Password<span class="required">*</span></label>
+                                <h:inputSecret class="input-text"  id="password" 
+                                               value="#{userIdentity.customer.password}" 
+                                               requiredMessage="Please enter validate password">
+                                    <f:validateRequired />                                                      
+                                    <f:ajax event="blur" render="passwordMessage" />     
+                                </h:inputSecret>
+                                <h:message  style="color: red" id="passwordMessage" for="password"/>
+                            </p>
+
+                            <p class="form-row form-row-wide">
+                                <label for="bd">Birthday (dd-MM-yyyy)<span class="required">*</span></label>
+                                <h:inputText  class="input-text"  id="bd" 
+                                              value="#{userIdentity.customer.birthday}" 
+                                              requiredMessage="Please enter validate birthday">
+                                    <f:validateRequired />
+
+                                    <f:ajax event="blur" render="bdMessage" />     
+                                    <f:convertDateTime pattern="dd-MM-yyyy"/>  
+                                </h:inputText>
+                                <h:message  style="color: red" id="bdMessage" for="bd"/>
+                            </p>
+                            <p class="form-row form-row-wide">
+                                <label for="phone">Phone<span class="required">*</span></label>
+                                <h:inputText  class="input-text"  id="phone" 
+                                              value="#{userIdentity.customer.phone}" 
+                                              requiredMessage="Please enter phone">
+                                    <f:ajax event="blur" render="phoneMesage" />     
+                                    <f:validateRequired />
+                                </h:inputText>
+                                <h:message id="phoneMesage" style="color: red"  for="phone"/>
+                            </p>
+                            <p class="form-row form-row-wide">
+                                <label for="address">Address<span class="required">*</span></label>
+                                <h:inputText  class="input-text"  id="address" 
+                                              value="#{userIdentity.customer.address}" 
+                                              requiredMessage="Please enter address">
+                                    <f:ajax event="blur" render="addressMesage" />     
+                                    <f:validateRequired />
+                                </h:inputText>
+                                <h:message id="addressMesage" style="color: red"  for="address"/>
+                            </p>
+                            <p class="form-row form-row-wide">
+                                <img width="200px" id="avtImg" src="#{userIdentity.customer.avatar}"/>
+                                <label for="avt">Avartar<span class="required">*</span></label>
+                                <h:inputFile class="input-text"  id="favt" />
+                            </p>
+                            <h:inputHidden id="avt" value="#{userIdentity.customer.avatar}"/>
+
+                            <p class="form-row"><h:commandButton  class="button" action="#{userIdentity.updateInfor()}" value="Save" /></p>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </article>
+    </ui:define>
+</ui:composition>

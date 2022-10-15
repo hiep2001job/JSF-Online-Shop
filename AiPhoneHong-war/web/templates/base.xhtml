@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>    
+        <title>AiPhoneHong</title>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,700italic,800,800italic,600italic,400italic,300italic' rel='stylesheet' type='text/css'/>
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['assets/images/fav-icon.png']}"/>
+        <h:outputStylesheet  name="assets/css/bootstrap.min.css"  />
+        <h:outputStylesheet name="assets/css/bootstrap.min.css"  />
+        <h:outputStylesheet name="assets/css/font-awesome.min.css" />
+        <h:outputStylesheet name="assets/css/animate.min.css" />
+        <h:outputStylesheet name="assets/css/font-electro.css" />
+        <h:outputStylesheet name="assets/css/owl-carousel.css" />
+        <h:outputStylesheet name="assets/css/style.css" />
+        <h:outputStylesheet name="assets/css/colors/yellow.css" />
+        
+        <script src = "https://code.jquery.com/jquery-2.2.4.min.js" ></script>
+       
+        <h:outputScript library="primefaces" name="jquery/jquery-plugins.js"/>
+    </h:head>
+
+
+    <h:body class="page home page-template-default">   
+        <div id="page" class="hfeed site">
+            <ui:insert name="header">
+                <ui:include src="header.xhtml"/>
+            </ui:insert>
+            <ui:insert name="content">
+                <ui:include src="content.xhtml"/>
+            </ui:insert>
+            <ui:insert name="footer">
+                <ui:include src="footer.xhtml"/>
+            </ui:insert>
+
+
+
+            <h:outputScript name="assets/js/tether.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/bootstrap.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/bootstrap-hover-dropdown.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/owl.carousel.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/echo.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/wow.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/jquery.easing.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/jquery.waypoints.min.js"></h:outputScript>
+            <h:outputScript name="assets/js/electro.js"></h:outputScript>
+        </div>
+    </h:body>
+</html>
+
